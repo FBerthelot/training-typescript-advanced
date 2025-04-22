@@ -1,4 +1,6 @@
-const pokemons: {name: string, type: string, hp: number, attack: number}[] = [
+import { PokemonFromAPI } from "./pokemon.gateway.interface";
+
+const pokemons: PokemonFromAPI[] = [
     {
         name: 'pikachu',
         type: 'electric',
@@ -27,7 +29,7 @@ const pokemons: {name: string, type: string, hp: number, attack: number}[] = [
 
 
 export class PokemonGateway {
-    getAllPokemons(): {name: string, type: string, hp: number, attack: number}[] {
+    getAllPokemons(): PokemonFromAPI[] {
         return pokemons;
     }
 }

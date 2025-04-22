@@ -1,9 +1,9 @@
-import { PokemonGateway } from "./pokemon.gateway";
+import { IPokemonGateway } from "./pokemon.gateway.interface";
 import { PokemonRepository } from "./pokemon.repository";
 
 export class collectPokemonUseCase {
     constructor(
-        private readonly pokemonGateway: PokemonGateway,
+        private readonly pokemonGateway: IPokemonGateway,
         private readonly pokemonRepository: PokemonRepository,
     ) {}
 
