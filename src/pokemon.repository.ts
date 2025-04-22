@@ -1,9 +1,9 @@
 
 
 export class PokemonRepository {
-    #pokemons: {name: string, lvl: number}[] = [];
+    #pokemons: {name: string, customName: string; lvl: number}[] = [];
 
-    addPokemon(pokemon: {name: string, lvl: number}) {
+    addPokemon(pokemon: {name: string, lvl: number, customName: string}) {
         this.#pokemons.push(pokemon);
     }
 

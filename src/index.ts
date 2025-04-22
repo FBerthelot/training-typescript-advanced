@@ -13,17 +13,17 @@ const pokemonGateway = new PokemonGateway()
 new collectPokemonUseCase(
     pokemonGateway,
     pokemonRepository
-).execute('pikachu')
+).execute('pikachu', 'pikachu-electric')
 
 new collectPokemonUseCase(
     pokemonGateway,
     pokemonRepository
-).execute('bulbizare')
+).execute('bulbizare', 'bulbizare-grass')
 
 new collectPokemonUseCase(
     pokemonGateway,
     pokemonRepository
-).execute('pikachu')
+).execute('pikachu', 'pikachu-electric')
 
 
 const myPokemons = new getMyPokemons(

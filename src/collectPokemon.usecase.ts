@@ -1,4 +1,4 @@
-import { IPokemonGateway } from "./pokemon.gateway.interface";
+import { IPokemonGateway, PokemonFromAPI } from "./pokemon.gateway.interface";
 import { PokemonRepository } from "./pokemon.repository";
 
 export class collectPokemonUseCase {
@@ -7,7 +7,7 @@ export class collectPokemonUseCase {
         private readonly pokemonRepository: PokemonRepository,
     ) {}
 
-    execute(name: string) {
+    execute(name: PokemonFromAPI['name'], customName: `${string}-${PokemonFromAPI['type']}`) {
         const existingPokemons = this.pokemonGateway.getAllPokemons();
         const myPokemon = existingPokemons.find(pokemon => pokemon.name === name );
 
@@ -21,7 +21,7 @@ export class collectPokemonUseCase {
         if(pokemonAlreadyOwned) {
             this.pokemonRepository.updatePokemonLvl(name);
         } else {
-            this.pokemonRepository.addPokemon({name, lvl: 1});
+            this.pokemonRepository.addPokemon({name, lvl: 1, customName});
         }
     }
 }
