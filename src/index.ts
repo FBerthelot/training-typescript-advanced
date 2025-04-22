@@ -1,45 +1,34 @@
-const pokemons: {
-    name: string,
-    type: string
-    hp: number,
-    attack: number,
-}[] = [
-    {
-        name: 'pikachu',
-        type: 'electric',
-        hp: 35,
-        attack: 55,
+import { collectPokemonUseCase } from "./collectPokemon.usecase";
+import { getMyPokemons } from "./getMyPokemons.usecase";
+import { logPokemon } from "./logger";
+import { PokemonGateway } from "./pokemon.gateway";
+import { PokemonRepository } from "./pokemon.repository";
 
-    },
-    {
-        name: 'bulbizare',
-        type: 'grass',
-        hp: 45,
-        attack: 49,
-    },
-    {
-        name: 'charmander',
-        type: 'fire',
-        hp: 39,
-        attack: 52,
-    },
-    {
-        name: 'squirtle',
-        type: 'water',
-        hp: 44,
-        attack: 48,
-    }
-]
+console.log('Start playing the game...');
+
+const pokemonRepository = new PokemonRepository()
+const pokemonGateway = new PokemonGateway()
 
 
-const logPokemon = (pokemon: {
-    name: string,
-    type: string
-    hp: number,
-    attack: number,
-}) => {
-    console.log(`${pokemon.name} is type ${pokemon.type} and has ${pokemon.hp} hp and ${pokemon.attack} attack`);
-}
+new collectPokemonUseCase(
+    pokemonGateway,
+    pokemonRepository
+).execute('pikachu')
+
+new collectPokemonUseCase(
+    pokemonGateway,
+    pokemonRepository
+).execute('bulbizare')
+
+new collectPokemonUseCase(
+    pokemonGateway,
+    pokemonRepository
+).execute('pikachu')
 
 
-logPokemon(pokemons[0]);
+const myPokemons = new getMyPokemons(
+    pokemonGateway,
+    pokemonRepository
+).execute();
+
+myPokemons.forEach(logPokemon)
