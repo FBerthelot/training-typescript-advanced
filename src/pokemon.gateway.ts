@@ -1,4 +1,5 @@
-import { Pokemon, PokemonFromAPI } from "./pokemon.gateway.interface";
+import { PokemonType } from "./pokemon.entities";
+import { Pokemon, PokemonFromAPI, PokemonPsy } from "./pokemon.gateway.interface";
 
 const pokemons: PokemonFromAPI[] = [
     {
@@ -50,4 +51,11 @@ export class PokemonGateway {
             }
         });
     }
+
+    getPokemonsByType<Type extends Pokemon>(type: PokemonType): Type[] {
+        return this.getAllPokemons().filter(pokemon => pokemon.type === type) as Type[];
+    }
 }
+
+
+//const result: PokemonPsy = new PokemonGateway().getPokemonsByType<PokemonPsy>('psychic')[0];

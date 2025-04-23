@@ -8,7 +8,7 @@ type PokemonBase = {
     attack: number,
 }
 
-type PokemonPsy = PokemonBase & {
+export type PokemonPsy = PokemonBase & {
     type: 'psychic',
     lvlBonusToOtherPokemon: 2
 }
