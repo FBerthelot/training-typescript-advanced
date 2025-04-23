@@ -25,6 +25,11 @@ new collectPokemonUseCase(
     pokemonRepository
 ).execute('pikachu', 'pikachu-electric')
 
+new collectPokemonUseCase(
+    pokemonGateway,
+    pokemonRepository
+).execute('mewtwo', 'mewtwo-psychic')
+
 
 const myPokemons = new getMyPokemons(
     pokemonGateway,

@@ -1,4 +1,4 @@
-import { PokemonFromAPI } from "./pokemon.gateway.interface";
+import { Pokemon, PokemonFromAPI } from "./pokemon.gateway.interface";
 
 const pokemons: PokemonFromAPI[] = [
     {
@@ -24,12 +24,30 @@ const pokemons: PokemonFromAPI[] = [
         type: 'water',
         hp: 44,
         attack: 48,
+    },
+    {
+        name: 'mewtwo',
+        type: 'psychic',
+        hp: 106,
+        attack: 110,
     }
 ]
 
 
 export class PokemonGateway {
-    getAllPokemons(): PokemonFromAPI[] {
-        return pokemons;
+    getAllPokemons(): Pokemon[] {
+        return pokemons.map(pokemons => {
+            if (pokemons.type === 'psychic') {
+                return {
+                    ...pokemons,
+                    type: 'psychic',
+                    lvlBonusToOtherPokemon: 2
+                }
+            }
+            return {
+                ...pokemons,
+                type: pokemons.type,
+            }
+        });
     }
 }

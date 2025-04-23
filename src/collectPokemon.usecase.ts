@@ -1,4 +1,4 @@
-import { IPokemonGateway, PokemonFromAPI } from "./pokemon.gateway.interface";
+import { IPokemonGateway, isPsychic, PokemonFromAPI } from "./pokemon.gateway.interface";
 import { PokemonRepository } from "./pokemon.repository";
 
 export class collectPokemonUseCase {
@@ -16,7 +16,16 @@ export class collectPokemonUseCase {
         }
 
         const myPokemons = this.pokemonRepository.getAllPokemons();
+
+
         const pokemonAlreadyOwned = myPokemons.find(pokemon => pokemon.name === name);
+
+        if(isPsychic(myPokemon)) {
+            myPokemons.forEach(poke => {
+                this.pokemonRepository.updatePokemonLvl(poke.name)
+                this.pokemonRepository.updatePokemonLvl(poke.name)
+            })
+        }
 
         if(pokemonAlreadyOwned) {
             this.pokemonRepository.updatePokemonLvl(name);

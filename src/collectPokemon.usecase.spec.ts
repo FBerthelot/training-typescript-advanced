@@ -1,11 +1,11 @@
 import {describe, it, expect, vitest, beforeEach} from 'vitest';
 import { collectPokemonUseCase } from './collectPokemon.usecase';
 import { PokemonRepository } from './pokemon.repository';
-import { PokemonFromAPI } from './pokemon.gateway.interface';
+import { Pokemon } from './pokemon.gateway.interface';
 
 const pokemonGatewayStub = {
     getAllPokemons: vitest.fn(() => {
-        const response: PokemonFromAPI[] = [{
+        const response: Pokemon[] = [{
         name: 'toto',
         type: 'electric',
         hp: 35,
