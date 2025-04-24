@@ -17,7 +17,7 @@ const pokemonGatewayStub = {
         hp: 45,
         attack: 49,
     }]
-    return response;
+    return Promise.resolve(response);
 })
 }
 

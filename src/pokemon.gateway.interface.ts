@@ -20,7 +20,7 @@ type PokemonOther = PokemonBase & {
 export type Pokemon = PokemonPsy | PokemonOther
 
 export interface IPokemonGateway {
-    getAllPokemons(): Pokemon[];
+    getAllPokemons(): Promise<Pokemon[]>;
 }
 
 export const isPsychic = (pokemon: Pokemon): pokemon is PokemonPsy => pokemon.type === 'psychic';

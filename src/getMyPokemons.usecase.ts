@@ -7,8 +7,8 @@ export class getMyPokemons {
         private readonly pokemonRepository: PokemonRepository,
     ) {}
 
-    execute() {
-        const pokemons = this.pokemonGateway.getAllPokemons();
+    async execute() {
+        const pokemons = await this.pokemonGateway.getAllPokemons();
         const myPokemons = this.pokemonRepository.getAllPokemons();
 
         return myPokemons.map(myPokemon => {

@@ -7,12 +7,12 @@ export class collectPokemonUseCase {
         private readonly pokemonRepository: PokemonRepository,
     ) {}
 
-    execute(name: PokemonFromAPI['name'], customName: `${string}-${PokemonFromAPI['type']}`) {
-        const existingPokemons = this.pokemonGateway.getAllPokemons();
+    async execute(name: PokemonFromAPI['name'], customName: `${string}-${PokemonFromAPI['type']}`) {
+        const existingPokemons = await this.pokemonGateway.getAllPokemons();
         const myPokemon = existingPokemons.find(pokemon => pokemon.name === name );
 
         if(!myPokemon) {
-            throw new Error('Pokemon not found');
+            throw new Error(`Pokemon ${name} not found`);
         }
 
         const myPokemons = this.pokemonRepository.getAllPokemons();

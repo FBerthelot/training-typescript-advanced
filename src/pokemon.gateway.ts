@@ -1,5 +1,6 @@
 import { PokemonType } from "./pokemon.entities";
 import { Pokemon, PokemonFromAPI, PokemonPsy } from "./pokemon.gateway.interface";
+import { z } from "zod";
 
 const pokemons: PokemonFromAPI[] = [
     {
@@ -35,25 +36,41 @@ const pokemons: PokemonFromAPI[] = [
 ]
 
 
+const pokemonFromAPISchema = z.object({
+    results: z.array(z.object({
+        name: z.string(),
+    }))
+})
+
 export class PokemonGateway {
-    getAllPokemons(): Pokemon[] {
-        return pokemons.map(pokemons => {
-            if (pokemons.type === 'psychic') {
+    async getAllPokemons(): Promise<Pokemon[]> {
+        const allPokemons = await fetch('https://pokeapi.co/api/v2/pokemon?limit=150')
+            .then(response => response.json())
+
+        
+        const parsedPokemons = pokemonFromAPISchema.parse(allPokemons);
+        
+        return parsedPokemons.results.map((pokemons) => {
+            if (pokemons.name === 'mewtwo') {
                 return {
-                    ...pokemons,
+                    name: pokemons.name,
+                    hp: 106,
+                    attack: 110,
                     type: 'psychic',
                     lvlBonusToOtherPokemon: 2
                 }
             }
             return {
-                ...pokemons,
-                type: pokemons.type,
+                name: pokemons.name,
+                hp: 106,
+                attack: 110,
+                type: 'electric',
             }
         });
     }
 
     getPokemonsByType<Type extends Pokemon>(type: PokemonType): Type[] {
-        return this.getAllPokemons().filter(pokemon => pokemon.type === type) as Type[];
+        return pokemons.filter(pokemon => pokemon.type === type) as Type[];
     }
 }
 
